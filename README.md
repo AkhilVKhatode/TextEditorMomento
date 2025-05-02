@@ -52,60 +52,8 @@ After second undo, text: Hello
 
 
 ### Update - Redo feature implemented
+```python
 class TextEditor:
-    def __init__(self):
-        self.text = ""
-
-    def set_text(self, text):
-        self.text = text
-
-    def get_text(self):
-        return self.text
-
-    # Creates a memento (snapshot) of the current state
-    def save(self):
-        return Memento(self.text)
-
-    # Restores the state from the given memento
-    def restore(self, memento):
-        self.text = memento.get_text()
-
-
-class Memento:
-    def __init__(self, text):
-        self.text = text
-
-    def get_text(self):
-        return self.text
-
-
-class EditorHistory:
-    def __init__(self):
-        self.undo_stack = []
-        self.redo_stack = []
-
-    # Save new state; clear redo stack when a new state is saved
-    def save_state(self, memento):
-        self.undo_stack.append(memento)
-        self.redo_stack.clear()
-
-    # Undo operation: push current state to redo stack and return last state from undo stack
-    def undo(self, current_state):
-        if self.undo_stack:
-            self.redo_stack.append(current_state)
-            return self.undo_stack.pop()
-        return None
-
-    # Redo operation: push current state to undo stack and return last state from redo stack
-    def redo(self, current_state):
-        if self.redo_stack:
-            self.undo_stack.append(current_state)
-            return self.redo_stack.pop()
-        return None
-
-
-# Memento Pattern with Undo/Redo Demo
-```class TextEditor:
     def __init__(self):
         self.text = ""
 
